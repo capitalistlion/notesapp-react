@@ -16,7 +16,8 @@ export default function App() {
      *    use JSON.parse() to turn the stringified array back
      *    into a real JS array.
      */
-    
+     document.title = "Notes App"
+     
     const [notes, setNotes] = React.useState(JSON.parse(localStorage.getItem("notes")) || [])
     const [currentNoteId, setCurrentNoteId] = React.useState(
         (notes[0] && notes[0].id) || ""
