@@ -1,3 +1,5 @@
 git add .
-git commit -m "update sidebar & notes state"
+git commit -m "arrange order to active note"
 git push
+
+yarn deploy
