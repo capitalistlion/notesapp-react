@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/notesapp-react/static/js/main.70cc8bae.js",
+    "main.js": "/notesapp-react/static/js/main.a6092f1a.js",
     "index.html": "/notesapp-react/index.html",
-    "main.70cc8bae.js.map": "/notesapp-react/static/js/main.70cc8bae.js.map"
+    "main.a6092f1a.js.map": "/notesapp-react/static/js/main.a6092f1a.js.map"
   },
   "entrypoints": [
-    "static/js/main.70cc8bae.js"
+    "static/js/main.a6092f1a.js"
   ]
 }
