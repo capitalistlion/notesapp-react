@@ -37,6 +37,7 @@ export default function App() {
     }
 
     function updateNote(text) {
+        //Puts most recently updated note at the top
         setNotes(oldNotes => {
             const newArray = []
             for(let i = 0; i < oldNotes.length; i++) {
@@ -51,6 +52,12 @@ export default function App() {
         })
     }
     
+    function deleteNote(event, selectedNoteId) {
+        // Stop parent object from being selected after deletion occurs
+        event.stopPropagation()
+        setNotes(oldNotes => oldNotes.filter(oldNote => oldNote.id !== selectedNoteId))
+    }
+
     function findCurrentNote() {
         return notes.find(note => {
             return note.id === currentNoteId
@@ -72,6 +79,7 @@ export default function App() {
                     currentNote={findCurrentNote()}
                     setCurrentNoteId={setCurrentNoteId}
                     newNote={createNewNote}
+                    deleteNote={deleteNote}
                 />
                 {
                     currentNoteId && 

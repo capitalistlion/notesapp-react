@@ -1,5 +1,5 @@
 git add .
-git commit -m "arrange order to active note"
+git commit -m "create deleteNote"
 git push
 
 yarn deploy
