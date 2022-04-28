@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import Sidebar from "./components/Sidebar"
 import Editor from "./components/Editor"
 import { data } from "./data"
@@ -16,17 +16,29 @@ export default function App() {
      *    use JSON.parse() to turn the stringified array back
      *    into a real JS array.
      */
-     document.title = "Notes App"
 
-    const [notes, setNotes] = React.useState(() => JSON.parse(localStorage.getItem("notes")) || [])
-    const [currentNoteId, setCurrentNoteId] = React.useState(
+    const [notes, setNotes] = useState(() => JSON.parse(localStorage.getItem("notes")) || [])
+    const [currentNoteId, setCurrentNoteId] = useState(
         (notes[0] && notes[0].id) || ""
     )
+
+    const [firstName, setFirstName] = useState(localStorage.getItem("firstName") || "")
 
     useEffect(() => {
         localStorage.setItem("notes", JSON.stringify(notes))
     }, [notes])
     
+    useEffect(() => {
+        localStorage.setItem("firstName", firstName)
+        { firstName ? document.title = `${firstName}'s Notes App` : document.title = `Notes App`}
+    }, [firstName])
+
+    function handleChange(event){
+        console.log("handleChange")
+        const {name, value} = event.target
+        setFirstName(value)
+    }
+
     function createNewNote() {
         const newNote = {
             id: nanoid(),
@@ -75,6 +87,7 @@ export default function App() {
                 className="split"
             >
                 <Sidebar
+                    firstName={firstName}
                     notes={notes}
                     currentNote={findCurrentNote()}
                     setCurrentNoteId={setCurrentNoteId}
@@ -92,6 +105,22 @@ export default function App() {
             </Split>
             :
             <div className="no-notes">
+                {/* ASK FOR FIRST NAME TO ADD A GREETING */}
+                { firstName ? 
+                <h1>Welcome back {firstName}</h1>
+                :
+                <>
+                <h1>What's your first name?</h1>
+                <input  
+                    name="firstName"
+                    type="text"
+                    onChange={handleChange}
+                    placeholder="Enter first name"
+                    value={firstName}
+                />
+                <h4>You can start creating notes after you finish entering your name</h4>
+                </>
+}
                 <h1>You have no notes</h1>
                 <button 
                     className="first-note" 
